@@ -1,0 +1,21 @@
+-- TRANSAÇÕES:
+BEGIN TRAN;
+
+DECLARE @registroAfetado INT = 0;
+
+UPDATE FUNCIONARIO
+SET SALARIO = 3000
+WHERE PNOME = 'Carlos' AND UNOME = 'Silva';
+
+SET @registroAfetado = @@ROWCOUNT;
+
+IF @registroAfetado <> 1
+BEGIN
+    ROLLBACK TRAN;
+    PRINT 'ALTERAÇÃO NAO REALIZADA';
+END
+ELSE
+BEGIN 
+    COMMIT TRAN;
+    PRINT 'ALTERAÇÃO REALIZADA';
+END
